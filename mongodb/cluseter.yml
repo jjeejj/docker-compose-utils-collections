@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+    mongo:
+        image: mongo:4.0
+        container_name: mongoClusterServer1
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: root
+        ports:
+            - 27020:27017
+        volumes:
+            - ./single/data:/data/db
+            - ./single/mongodb.key:/data/mongodb.key
