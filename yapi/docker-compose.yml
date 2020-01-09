@@ -1,14 +1,16 @@
-version: '3.1'
-services:
-    mongo:
+version: "3.1"
+services: 
+    yapi:
+        image: .
+        container_name: YapiServer
+    mongo: 
         image: mongo:4.0
-        container_name: mongoSingleServer
+        container_name: mongoServer
         restart: always
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: root
         ports:
             - 27017:27017
-        volumes:
-            - ./single/data:/data/db
-            - ./single/mongodb.key:/data/mongodb.key
+        volumes: 
+            - ./mongo/data:/data/db
