@@ -1,0 +1,14 @@
+version: "3.1"
+services:
+    mysql:
+        image: mysql:5.7.29
+        container_name: mysql5.7
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456
+        volumes: # 该路径根据实际修改
+            - /root/mysql/data:/var/lib/mysql
+            - /root/mysql/conf:/etc/mysql
+            - /root/mysql/logs:/var/log/mysql
+        ports:
+            - 3306:3306
