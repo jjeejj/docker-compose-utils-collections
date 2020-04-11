@@ -6,8 +6,8 @@ services:
         environment: 
             - node.name=es01
             - cluster.name=es-docker-cluster
-            - discover.seed_hosts=es02,es03
-            - cluster.initial_master_nodes=es01,es02,es03
+            - discovery.seed_hosts=es01,es02
+            - cluster.initial_master_nodes=es01,es02
             - bootstrap.memory_lock=true
             - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
         ulimits: 
@@ -15,7 +15,7 @@ services:
                 soft: -1
                 hard: -1
         volumes: 
-            - data01:/usr/share/elasticsearch/data
+            - ./data01:/usr/share/elasticsearch/data
         ports:
             - 9200:9200
         networks: 
@@ -26,8 +26,8 @@ services:
         environment: 
             - node.name=es02
             - cluster.name=es-docker-cluster
-            - discover.seed_hosts=es01,es03
-            - cluster.initial_master_nodes=es01,es02,es03
+            - discovery.seed_hosts=es01,es02
+            - cluster.initial_master_nodes=es01,es02
             - bootstrap.memory_lock=true
             - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
         ulimits: 
@@ -35,25 +35,7 @@ services:
                 soft: -1
                 hard: -1
         volumes: 
-            - data02:/usr/share/elasticsearch/data
-        networks: 
-            - elastic
-    elasticsearch03:
-        image: elasticsearch:7.6.1
-        container_name: es03
-        environment: 
-            - node.name=es03
-            - cluster.name=es-docker-cluster
-            - discover.seed_hosts=es01,es02
-            - cluster.initial_master_nodes=es01,es02,es03
-            - bootstrap.memory_lock=true
-            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-        ulimits: 
-            memlock:
-                soft: -1
-                hard: -1
-        volumes: 
-            - data03:/usr/share/elasticsearch/data
+            - ./data02:/usr/share/elasticsearch/data
         networks: 
             - elastic
     kibana:
@@ -63,6 +45,8 @@ services:
             - I18N_LOCAL=zh-CN
         ports:
             - 5601:5601
+        # volumes: 
+        #     - ./kibana.yml:/usr/share/kibana/config/kibana.yml
         networks:
             - elastic
     cerebro:
@@ -73,14 +57,7 @@ services:
         networks: 
             - elastic
         command: 
-            - -Dhosts.0.host=http://es01:9200
-volumes: 
-    data01:
-        driver: local
-    data02:
-        driver: local
-    data03:
-        driver: local
+            - -Dhosts.0.host=http://elasticsearch:9200
 
 networks: 
     elastic:
