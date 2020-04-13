@@ -4,8 +4,8 @@ services:
         image: elasticsearch:7.6.1
         container_name: es01
         environment: 
+            - cluster.name=es_docker_cluster
             - node.name=es01
-            - cluster.name=es-docker-cluster
             - discovery.seed_hosts=es01,es02
             - cluster.initial_master_nodes=es01,es02
             - bootstrap.memory_lock=true
@@ -24,8 +24,8 @@ services:
         image: elasticsearch:7.6.1
         container_name: es02
         environment: 
+            - cluster.name=es_docker_cluster
             - node.name=es02
-            - cluster.name=es-docker-cluster
             - discovery.seed_hosts=es01,es02
             - cluster.initial_master_nodes=es01,es02
             - bootstrap.memory_lock=true
@@ -43,10 +43,11 @@ services:
         container_name: kibana
         environment: 
             - I18N_LOCAL=zh-CN
+            - XPACK_GRAPH_ENABLED=true
+            - TIMELION_ENABLED=true
+            - XPACK_MONITORING_COLLECTION_ENABLED="true"
         ports:
             - 5601:5601
-        # volumes: 
-        #     - ./kibana.yml:/usr/share/kibana/config/kibana.yml
         networks:
             - elastic
     cerebro:
@@ -58,7 +59,6 @@ services:
             - elastic
         command: 
             - -Dhosts.0.host=http://elasticsearch:9200
-
 networks: 
     elastic:
         driver: bridge
