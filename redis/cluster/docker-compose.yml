@@ -1,0 +1,31 @@
+version: "3"
+
+services: 
+    redis1:
+        image: redis:5.0.5
+        container_name: redis-node1
+        restart: always
+        environment: 
+            - TZ=Asia/Shanghai
+        ports: 
+            - 6379:6379
+            - 16379:16379
+        volumes: 
+            - ./data/node1:/data
+            - ./config/redis1.conf:/usr/local/etc/redis/redis.conf
+        command: 
+            redis-server /usr/local/etc/redis/redis.conf
+    redis2:
+        image: redis:5.0.5
+        container_name: redis-node2
+        restart: always
+        environment: 
+            - TZ=Asia/Shanghai
+        ports: 
+            - 6380:6379
+            - 16380:16379
+        volumes: 
+            - ./data/node2:/data
+            - ./config/redis2.conf:/usr/local/etc/redis/redis.conf
+        command: 
+            redis-server /usr/local/etc/redis/redis.conf
