@@ -1,31 +1,96 @@
 version: "3"
 
 services: 
-    redis1:
+    redis_master1:
         image: redis:5.0.5
-        container_name: redis-node1
+        container_name: redis-master-node1
         restart: always
+        networks: 
+            - redis-cluster-net
         environment: 
             - TZ=Asia/Shanghai
         ports: 
-            - 6379:6379
-            - 16379:16379
+            - 30001:30001
         volumes: 
-            - ./data/node1:/data
-            - ./config/redis1.conf:/usr/local/etc/redis/redis.conf
+            - ./data/master-node1:/data
+            - ./config/redis1-master.conf:/usr/local/etc/redis/redis.conf
         command: 
             redis-server /usr/local/etc/redis/redis.conf
-    redis2:
+    redis_slave1:
         image: redis:5.0.5
-        container_name: redis-node2
+        container_name: redis-slave-node1
         restart: always
+        networks: 
+            - redis-cluster-net
         environment: 
             - TZ=Asia/Shanghai
         ports: 
-            - 6380:6379
-            - 16380:16379
+            - 30004:30004
         volumes: 
-            - ./data/node2:/data
-            - ./config/redis2.conf:/usr/local/etc/redis/redis.conf
+            - ./data/slave-node1:/data
+            - ./config/redis1-slave.conf:/usr/local/etc/redis/redis.conf
         command: 
             redis-server /usr/local/etc/redis/redis.conf
+    redis_master2:
+        image: redis:5.0.5
+        container_name: redis-master-node2
+        restart: always
+        networks: 
+            - redis-cluster-net
+        environment: 
+            - TZ=Asia/Shanghai
+        ports: 
+            - 30002:30002
+        volumes: 
+            - ./data/master-node2:/data
+            - ./config/redis2-master.conf:/usr/local/etc/redis/redis.conf
+        command: 
+            redis-server /usr/local/etc/redis/redis.conf
+    redis_slave1:
+        image: redis:5.0.5
+        container_name: redis-slave-node2
+        restart: always
+        networks: 
+            - redis-cluster-net
+        environment: 
+            - TZ=Asia/Shanghai
+        ports: 
+            - 30005:30005
+        volumes: 
+            - ./data/slave-node2:/data
+            - ./config/redis2-slave.conf:/usr/local/etc/redis/redis.conf
+        command: 
+            redis-server /usr/local/etc/redis/redis.conf
+    redis_master3:
+        image: redis:5.0.5
+        container_name: redis-master-node3
+        restart: always
+        networks: 
+            - redis-cluster-net
+        environment: 
+            - TZ=Asia/Shanghai
+        ports: 
+            - 30003:30003
+        volumes: 
+            - ./data/master-node3:/data
+            - ./config/redis3-master.conf:/usr/local/etc/redis/redis.conf
+        command: 
+            redis-server /usr/local/etc/redis/redis.conf
+    redis_slave3:
+        image: redis:5.0.5
+        container_name: redis-slave-node3
+        restart: always
+        networks: 
+            - redis-cluster-net
+        environment: 
+            - TZ=Asia/Shanghai
+        ports: 
+            - 30006:30006
+        volumes: 
+            - ./data/slave-node3:/data
+            - ./config/redis3-slave.conf:/usr/local/etc/redis/redis.conf
+        command: 
+            redis-server /usr/local/etc/redis/redis.conf
+networks: 
+    redis-cluster-net:
+        driver: bridge

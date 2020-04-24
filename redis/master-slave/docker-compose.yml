@@ -1,0 +1,35 @@
+version: "3"
+services: 
+    masterRedis:
+        image: redis:5.0.8
+        container_name: redis-master
+        restart: always
+        ports: 
+            - "6379:6379"
+        environment: 
+            TZ: "Asia/Shanghai"
+        volumes: 
+            - ./master.conf:/usr/local/etc/redis/redis.conf
+            - ./data/master-data:/data
+        command: redis-server /usr/local/etc/redis/redis.conf
+        networks: 
+            - redisnet
+    slaveRedis:
+        image: redis:5.0.8
+        container_name: slave-redis
+        restart: always
+        depends_on: 
+            - masterRedis
+        ports: 
+            - "6380:6380"
+        environment: 
+            TZ: "Asia/Shanghai"
+        volumes: 
+            - ./slave.conf:/usr/local/etc/redis/redis.conf
+            - ./data/salve-data:/data
+        command: redis-server  /usr/local/etc/redis/redis.conf --replicaof redis-master 6379
+        networks: 
+            - redisnet
+networks: 
+    redisnet:
+        driver: bridge
