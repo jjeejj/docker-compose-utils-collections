@@ -1,3 +1,4 @@
 **/data*/
 **/*.key
 coverage
+.nyc_output

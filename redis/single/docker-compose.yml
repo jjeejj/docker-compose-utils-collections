@@ -1,0 +1,19 @@
+version: "3"
+services: 
+    redis:
+        image: redis:5.0.5
+        container_name: single-redis
+        restart: always
+        ports: 
+            - "6379:6379"
+        environment: 
+            TZ: "Asia/Shanghai"
+        volumes: 
+            - ./redis.conf:/usr/local/etc/redis/redis.conf
+            - ./data:/data
+        command: redis-server /usr/local/etc/redis/redis.conf
+        networks: 
+            - redisnet
+networks: 
+    redisnet:
+        driver: bridge
