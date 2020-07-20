@@ -4,41 +4,41 @@ services:
     image: mongo:4.2.8
     container_name: mongoReplica1
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: root
     ports:
       - 28017:28017
     volumes:
-      - ./data/db1/logs/:/data/db/mongo.log
       - ./data/db1:/data/db
+      - ./data/db1/logs:/var/log/mongodb
       - ./mongod1.conf:/etc/mongod.conf
-    command: --config /etc/mongod.conf
+    command: ["-config", "/etc/mongod.conf"]
   mongoReplica2:
     image: mongo:4.2.8
     container_name: mongoReplica2
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: root
     ports:
       - 28018:28018
     volumes:
-      - ./data/db2/logs/:/data/db/mongo.log
       - ./data/db2:/data/db
+      - ./data/db2/logs:/var/log/mongodb
       - ./mongod2.conf:/etc/mongod.conf
-    command: --config /etc/mongod.conf
+    command: ["-config", "/etc/mongod.conf"]
   mongoReplica3:
     image: mongo:4.2.8
     container_name: mongoReplica3
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: root
     ports:
       - 28019:28017
     volumes:
-      - ./data/db3/logs/:/data/db/mongo.log
       - ./data/db3:/data/db
+      - ./data/db3/logs:/var/log/mongodb
       - ./mongod3.conf:/etc/mongod.conf
-    command: --config /etc/mongod.conf
+    command: ["-config", "/etc/mongod.conf"]
