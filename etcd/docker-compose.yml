@@ -1,0 +1,63 @@
+version: "3"
+services: 
+  etcd1:
+    image: quay.io/coreos/etcd:v3.4.13
+    container_name: etcdServer1
+    restart: always
+    ports: 
+      - 2379:2379
+      - 2380:2380
+    networks: 
+      - etcd
+    command: 
+      - /usr/local/bin/etcd 
+      - --name etcd1 
+      - --data-dir /data/etcd 
+      - --advertise-client-urls http://0.0.0.0:2379 
+      - --listen-peer-urls http://0.0.0.0:2380 
+      - --listen-client-urls http://0.0.0.0:2379 
+      - --initial-cluster-token etcd-cluster 
+      - --initial-cluster "etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380" 
+      - --initial-cluster-state new
+  etcd2:
+    image: quay.io/coreos/etcd:v3.4.13
+    container_name: etcdServer2
+    restart: always
+    ports: 
+      - 2379:2379
+      - 2380:2380
+    networks: 
+      - etcd
+    command: 
+      - /usr/local/bin/etcd 
+      - --name etcd2
+      - --data-dir /data/etcd 
+      - --advertise-client-urls http://0.0.0.0:2379 
+      - --listen-peer-urls http://0.0.0.0:2380 
+      - --listen-client-urls http://0.0.0.0:2379 
+      - --initial-cluster-token etcd-cluster 
+      - --initial-cluster "etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380" 
+      - --initial-cluster-state new
+  etcd3:
+    image: quay.io/coreos/etcd:v3.4.13
+    container_name: etcdServer3
+    restart: always
+    ports: 
+      - 2379:2379
+      - 2380:2380
+    networks: 
+      - etcd
+    command: 
+      - /usr/local/bin/etcd 
+      - --name etcd3
+      - --data-dir /data/etcd 
+      - --advertise-client-urls http://0.0.0.0:2379 
+      - --listen-peer-urls http://0.0.0.0:2380 
+      - --listen-client-urls http://0.0.0.0:2379 
+      - --initial-cluster-token etcd-cluster 
+      - --initial-cluster "etcd1=http://etcd1:2380,etcd2=http://etcd2:2380,etcd3=http://etcd3:2380" 
+      - --initial-cluster-state new
+
+networks: 
+  etcd:
+      driver: bridge
