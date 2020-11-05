@@ -1,9 +1,25 @@
-FROM node:12.14.1-slim
-LABEL maintainer="1048911681@qq.com"
+FROM node:12-alpine as builder
 
-RUN cd /home/yapi && \
-    wget https://github.com/YMFE/yapi/archive/master.zip && \
-    cd yapi-master && \
-    npm i --production
+RUN apk add git python make openssl unzip gcc
 
-WORKDIR /home/yapi/yapi-master
+RUN cd /home && wget https://github.com/jjeejj/yapi/archive/master.zip
+
+RUN cd /home && unzip master.zip && mkdir /api && mv /home/yapi-master /api/vendors
+
+RUN cd /api/vendors && \
+    npm install --production --registry https://registry.npm.taobao.org
+
+FROM node:12-alpine
+
+
+ENV TZ="Asia/Shanghai" HOME="/"
+
+WORKDIR ${HOME}
+
+COPY --from=builder /api/vendors /api/vendors
+
+COPY config.json /api/
+
+EXPOSE 80
+
+ENTRYPOINT ["node"]
