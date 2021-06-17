@@ -1,0 +1,18 @@
+version: "3"
+services:
+  redis:
+    image: redis:5.0.5
+    container_name: single-redis-salve
+    restart: always
+    ports:
+      - "6381:6379"
+    environment:
+      TZ: "Asia/Shanghai"
+    volumes:
+      - /Users/jiang/Repo/docker-compose-utils-collections/redis/master-slave/salve.conf:/usr/local/etc/redis/redis.conf
+      - /Users/jiang/Repo/docker-compose-utils-collections/redis/master-slave/data/salve:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+networks:
+  default:
+    external:
+      name: single_redisnet

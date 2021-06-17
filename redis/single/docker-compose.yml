@@ -1,19 +1,19 @@
 version: "3"
-services: 
-    redis:
-        image: redis:5.0.5
-        container_name: single-redis
-        restart: always
-        ports: 
-            - "6379:6379"
-        environment: 
-            TZ: "Asia/Shanghai"
-        volumes: 
-            - /Users/jiang/Repo/docker-compose-utils-collections/redis/single/redis.conf:/usr/local/etc/redis/redis.conf
-            - /Users/jiang/Repo/docker-compose-utils-collections/redis/single/data:/data
-        command: redis-server /usr/local/etc/redis/redis.conf
-        networks: 
-            - redisnet
-networks: 
-    redisnet:
-        driver: bridge
+services:
+  redis:
+    image: redis:5.0.5
+    container_name: single-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    environment:
+      TZ: "Asia/Shanghai"
+    volumes:
+      - /Users/jiang/Repo/docker-compose-utils-collections/redis/single/redis.conf:/usr/local/etc/redis/redis.conf
+      - /Users/jiang/Repo/docker-compose-utils-collections/redis/single/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - redisnet
+networks:
+  redisnet:
+    driver: bridge
