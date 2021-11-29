@@ -8,7 +8,10 @@ services:
             MYSQL_ROOT_PASSWORD: 123456
         volumes: # 该路径根据实际修改
             - /Users/jiang/Repo/docker-compose-utils-collections/mysql/data5.7/data:/var/lib/mysql
-            - /Users/jiang/Repo/docker-compose-utils-collections/mysql/data8.0/mysql-files:/var/lib/mysql-files
+            - /Users/jiang/Repo/docker-compose-utils-collections/mysql/data5.7/mysql-files:/var/lib/mysql-files
             - /Users/jiang/Repo/docker-compose-utils-collections/mysql/data5.7/logs:/var/log/mysql
         ports:
             - 3306:3306
+networks:
+  redisnet:
+    driver: bridge

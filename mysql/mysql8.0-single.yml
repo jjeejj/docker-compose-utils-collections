@@ -11,4 +11,4 @@ services:
             - /Users/jiang/Repo/docker-compose-utils-collections/mysql/data8.0/logs:/var/log/mysql
             - /Users/jiang/Repo/docker-compose-utils-collections/mysql/data8.0/mysql-files:/var/lib/mysql-files
         ports:
-            - 3306:3306
+            - 3307:3306
