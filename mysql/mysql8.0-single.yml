@@ -2,13 +2,15 @@ version: "3.1"
 services:
     mysql:
         image: mysql:8.0
+        platform: linux/amd64 # mac M1 linux/amd64
         container_name: mysql8.0
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: 123456
         volumes: # 该路径根据实际修改
-            - /Users/jiang/Repo/docker-compose-utils-collections/mysql/data8.0/data:/var/lib/mysql
-            - /Users/jiang/Repo/docker-compose-utils-collections/mysql/data8.0/logs:/var/log/mysql
-            - /Users/jiang/Repo/docker-compose-utils-collections/mysql/data8.0/mysql-files:/var/lib/mysql-files
+            - /Users/wenjunjiang/Repo/docker-compose-utils-collections/mysql/data8.0/data:/var/lib/mysql
+            - /Users/wenjunjiang/Repo/docker-compose-utils-collections/mysql/data8.0/logs:/var/log/mysql
+            - /Users/wenjunjiang/Repo/docker-compose-utils-collections/mysql/data8.0/mysql-files:/var/lib/mysql-files
+            - /Users/wenjunjiang/Repo/docker-compose-utils-collections/mysql/conf:/etc/mysql/conf.d
         ports:
-            - 3306:3306
+            - 3307:3306
