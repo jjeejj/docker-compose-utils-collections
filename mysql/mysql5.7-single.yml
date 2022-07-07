@@ -14,3 +14,6 @@ services:
             - /Users/wenjunjiang/Repo/docker-compose-utils-collections/mysql/conf:/etc/mysql/conf.d
         ports:
             - 3306:3306
+networks:
+  redisnet:
+    driver: bridge
