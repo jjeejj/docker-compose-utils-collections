@@ -1,0 +1,26 @@
+version: v3
+services: 
+  etcd:
+    image: quay.io/coreos/etcd:v3.4.13
+    container_name: etcd-single
+    command: etcd -name etcd0 -advertise-client-urls http://0.0.0.0:2379 -listen-client-urls http://0.0.0.0:2379 -listen-peer-urls http://0.0.0.0:2380
+    volumes:
+      - ./data:/Users/wenjunjiang/repo/docker-compose-utils-collections/etcd/single-data
+    ports:
+     - 12379:2379
+     - 12380:2380
+    networks:
+     - etcd_single
+    environment:
+     - ALLOW_NONE_AUTHENTICATION=yes
+  etcdkeeper:
+    image: deltaprojects/etcdkeeper
+    container_name: etcdkeeper-single
+    ports:
+     - 8080:8080
+    networks:
+     - etcd_single
+networks:
+  etcd_single:
+    driver: bridge
+  
