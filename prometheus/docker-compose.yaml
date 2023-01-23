@@ -1,0 +1,11 @@
+version: "3.1"
+services:
+  prometheus:
+    image: bitnami/prometheus:2.41.0
+    container_name: prometheus_2.41.0
+    restart: always
+    volumes:
+      - ./data:/opt/bitnami/prometheus/data
+      - ./conf/prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml
+    ports:
+      - 9091:9090
