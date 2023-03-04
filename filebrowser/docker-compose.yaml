@@ -1,0 +1,14 @@
+version: "3"
+services:
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    ports:
+      - 8234:80
+    environment:
+      - PUID=$(id -u)
+      - PGID=$(id -g)
+    volumes:
+      - /Users/wenjunjiang/repo/docker-compose-utils-collections/filebrowser/data/filebrowser.db:/filebrowser.db # 这里要使用绝对路径
+      - ./root:/srv # 这个参数代表文件保存的路径
+      - ./.filebrowser.json:/.filebrowser.json # 启动配置
