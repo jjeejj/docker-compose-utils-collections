@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  emqx1:
+    image: emqx:5.0.19
+    container_name: emqx1
+    environment:
+    - "EMQX_NODE_NAME=emqx@node1.emqx.com"
+    - "EMQX_CLUSTER__DISCOVERY_STRATEGY=static"
+    - "EMQX_CLUSTER__STATIC__SEEDS=[emqx@node1.emqx.com,emqx@node2.emqx.com]"
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx_ctl", "status"]
+      interval: 5s
+      timeout: 25s
+      retries: 5
+    networks:
+      emqx-bridge:
+        aliases:
+          - "node1.emqx.com"
+    ports:
+      - 21883:1883
+      - 28083:8083
+      - 28084:8084
+      - 28883:8883
+      - 18083:18083 
+    volumes:
+      - $PWD/data/node1:/opt/emqx/data
+
+  emqx2:
+    image: emqx:5.0.19
+    container_name: emqx2
+    environment:
+    - "EMQX_NODE_NAME=emqx@node2.emqx.com"
+    - "EMQX_HOST=127.0.0.1"
+    - "EMQX_CLUSTER__DISCOVERY_STRATEGY=static"
+    - "EMQX_CLUSTER__STATIC__SEEDS=[emqx@node1.emqx.com,emqx@node2.emqx.com]"
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx_ctl", "status"]
+      interval: 5s
+      timeout: 25s
+      retries: 5
+    networks:
+      emqx-bridge:
+        aliases:
+          - "node2.emqx.com"
+    volumes:
+      - $PWD/data/node2:/opt/emqx/data
+
+networks:
+  emqx-bridge:
+    driver: bridge
