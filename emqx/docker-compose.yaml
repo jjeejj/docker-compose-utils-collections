@@ -31,7 +31,6 @@ services:
     container_name: emqx2
     environment:
     - "EMQX_NODE_NAME=emqx@node2.emqx.com"
-    - "EMQX_HOST=127.0.0.1"
     - "EMQX_CLUSTER__DISCOVERY_STRATEGY=static"
     - "EMQX_CLUSTER__STATIC__SEEDS=[emqx@node1.emqx.com,emqx@node2.emqx.com]"
     healthcheck:
