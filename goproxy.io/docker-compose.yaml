@@ -1,0 +1,11 @@
+version: "3.1"
+services:
+  goproxy:
+    image: goproxy/goproxy
+    container_name: goproxy
+    restart: always
+    volumes:
+      - ./data/cache:/go
+    ports:
+      - 8888:8081
+    command: "-listen=0.0.0.0:8081 -cacheDir=/go -proxy https://goproxy.io -exclude 'goproxy.iyi.com'"
