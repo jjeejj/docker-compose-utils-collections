@@ -4,6 +4,9 @@ services:
     image: goproxy/goproxy
     container_name: goproxy
     restart: always
+    environment:
+     - "http_proxy=192.168.120.53:8080"
+     - "https_proxy=192.168.120.53:8080"
     volumes:
       - ./data/cache:/go
     ports:
