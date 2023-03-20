@@ -1,6 +1,12 @@
 {
     "editor.tabSize": 2,
     "cSpell.words": [
-        "filebrowser"
+        "feishu",
+        "filebrowser",
+        "htpasswd",
+        "middlewares",
+        "npmjs",
+        "taobao",
+        "unpublish"
     ]
 }
