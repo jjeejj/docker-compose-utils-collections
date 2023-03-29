@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  nacos:
+    image: "nacos/nacos-server:v2.1.2-slim"
+      # image: "m1-nacos:latest"
+    ports:
+      - "8848:8848"
+    environment:
+      - MODE=standalone
+      - JVM_XMS=512m
+      - JVM_XMX=512m
+      - JVM_XMN=256m
