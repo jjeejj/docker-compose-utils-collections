@@ -4,6 +4,7 @@ services:
   emqx1:
     image: emqx:5.0.19
     container_name: emqx1
+    restart: always,
     environment:
     - "EMQX_NODE_NAME=emqx@node1.emqx.com"
     - "EMQX_CLUSTER__DISCOVERY_STRATEGY=static"
@@ -29,6 +30,7 @@ services:
   emqx2:
     image: emqx:5.0.19
     container_name: emqx2
+    restart: always,
     environment:
     - "EMQX_NODE_NAME=emqx@node2.emqx.com"
     - "EMQX_CLUSTER__DISCOVERY_STRATEGY=static"
