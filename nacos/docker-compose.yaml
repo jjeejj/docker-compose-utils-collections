@@ -2,7 +2,9 @@ version: "3.7"
 services:
   nacos:
     image: "nacos/nacos-server:v2.1.2-slim"
-      # image: "m1-nacos:latest"
+          # image: "m1-nacos:latest"
+    container_name: nacos
+    restart: always
     ports:
       - "8848:8848"
     environment:
