@@ -1,0 +1,11 @@
+version: "3.1"
+services:
+  centos:
+    image: centos:centos7.9.2009
+    container_name: centos7.9.2009
+    platform: linux/amd64
+    restart: always
+    tty: true
+    privileged: true
+    volumes:
+      - /Users/wenjunjiang/work/yw/jhim:/data/jhim/
