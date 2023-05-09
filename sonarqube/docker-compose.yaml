@@ -6,7 +6,7 @@ services:
     restart: always
     volumes:
       - ${PWD}/data:/opt/sonarqube/data
-      - ${PWD}/log:/opt/sonarqube/logs
+      - ${PWD}/logs:/opt/sonarqube/logs
       - ${PWD}/extensions:/opt/sonarqube/extensions
     ports:
       - 9008:9000
