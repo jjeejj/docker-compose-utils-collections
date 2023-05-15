@@ -7,3 +7,5 @@ verdaccio/storage
 **/logs
 **/log
 sonarqube/extensions
+harbor/common
+harbor/cerrt
