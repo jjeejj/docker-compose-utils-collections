@@ -10,5 +10,5 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./single/data:/data/db
-      - ./single/mongodb.key:/data/mongodb.key
+      - ${PWD}/single/data:/data/db
+      - ${PWD}/single/mongodb.key:/data/mongodb.key
