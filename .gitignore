@@ -9,3 +9,4 @@ verdaccio/storage
 sonarqube/extensions
 harbor/common
 harbor/cerrt
+clickhouse/**/config/
