@@ -15,7 +15,7 @@ services:
       - "4150:4150"
       - "4151:4151"
     volumes:
-      - ./data:/data
+      - ${PWD}/data:/data
   nsqadmin:
     image: nsqio/nsq
     command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
