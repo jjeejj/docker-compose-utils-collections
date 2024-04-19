@@ -1,0 +1,72 @@
+version: "3"
+services:
+
+  outline:
+    image: outlinewiki/outline
+    restart: always
+    env_file: ./docker.env 
+    container_name: outline
+    ports:
+      - "3300:3000"
+    depends_on:
+      - postgres
+      - redis
+      - storage
+    #command: sh -c yarn sequelize:migrate --env=production-ssl-disabled && yarn start --env=production-ssl-disabled
+       
+  redis:
+    image: redis
+    env_file: ./docker.env
+    container_name: olredis
+    ports:
+      - "6479:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+
+  postgres:
+    image: postgres
+    env_file: ./docker.env
+    container_name: olpostgres
+    ports:
+      - "5532:5432"
+    volumes:
+      - /soltware/outline/database-data:/var/lib/postgresql/data:rw
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    environment:
+      POSTGRES_USER: 'admin'
+      POSTGRES_PASSWORD: 'admin123'
+      POSTGRES_DB: 'outline'
+
+  storage:
+    image: minio/minio
+    env_file: ./docker.env
+    container_name: olminio
+    entrypoint: sh    
+    ports:
+      - "9300:9000"
+      - "9301:9001"
+    command: -c 'minio server /data --console-address ":9001"'
+    #deploy:
+     # restart_policy:
+      #  condition: on-failure
+    environment:
+      MINIO_ROOT_USER: 'admin'
+      MINIO_ROOT_PASSWORD: 'admin123'
+    volumes:
+      - /soltware/outline/storage-data:/data:rw
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+volumes:
+  storage-data:
+  database-data:
