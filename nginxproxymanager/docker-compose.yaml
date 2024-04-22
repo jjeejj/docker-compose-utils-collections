@@ -8,6 +8,7 @@ services:
       - "80:80"
       - "81:81"
       - "443:443"
+      - "8401:8401" # 自定义其他 server 监听的端口，页面上通过 stream 添加
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
