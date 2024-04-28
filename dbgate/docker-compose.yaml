@@ -1,0 +1,35 @@
+version: '3'
+services:
+  dbgate:
+    image: dbgate/dbgate
+    restart: always
+    ports:
+      - 3009:3000
+    volumes:
+      - ./data:/root/.dbgate
+    environment: # 详细的环境变量使用方式，参考这个地址 https://dbgate.org/docs/env-variables.html 
+      LOGINS: admin # web 端登录账号 密码 
+      LOGIN_PASSWORD_admin: 123456
+    #   CONNECTIONS: con1,con2,con3,con4 # 这是默认配置的链接，可以不进行配置
+
+    #   LABEL_con1: MySql
+    #   SERVER_con1: mysql
+    #   USER_con1: root
+    #   PASSWORD_con1: TEST
+    #   PORT_con1: 3306
+    #   ENGINE_con1: mysql@dbgate-plugin-mysql
+
+    #   LABEL_con2: Postgres
+    #   SERVER_con2: postgres
+    #   USER_con2: postgres
+    #   PASSWORD_con2: TEST
+    #   PORT_con2: 5432
+    #   ENGINE_con2: postgres@dbgate-plugin-postgres
+
+    #   LABEL_con3: MongoDB
+    #   URL_con3: mongodb://mongo:27017
+    #   ENGINE_con3: mongo@dbgate-plugin-mongo
+
+    #   LABEL_con4: SQLite
+    #   FILE_con4: /home/jan/feeds.sqlite
+    #   ENGINE_con4: sqlite@dbgate-plugin-sqlite
