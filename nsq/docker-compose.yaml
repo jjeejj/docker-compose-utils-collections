@@ -3,12 +3,14 @@ services:
   nsqlookupd:
     image: nsqio/nsq
     command: /nsqlookupd
+    restart: always
     ports:
       - "4160:4160"
       - "4161:4161"
   nsqd:
     image: nsqio/nsq
     command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 --broadcast-address=192.168.100.101  --data-path=/data # broadcast-address 填实际的内网ip
+    restart: always
     depends_on:
       - nsqlookupd
     ports:
@@ -18,6 +20,7 @@ services:
       - ${PWD}/data:/data
   nsqadmin:
     image: nsqio/nsq
+    restart: always
     command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
     depends_on:
       - nsqlookupd
