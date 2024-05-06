@@ -10,3 +10,4 @@ sonarqube/extensions
 harbor/common
 harbor/cerrt
 clickhouse/**/config/
+nginxproxymanager/letsencrypt
