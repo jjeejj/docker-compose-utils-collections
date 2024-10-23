@@ -1,0 +1,13 @@
+services:
+  code_server:
+    image: codercom/code-server:latest
+    restart: always
+    container_name: code-server
+    volumes:
+      - ./.local:/home/coder/.local
+      - ./.config:/home/coder/.config
+      - ./.project:/home/coder/project
+    environment:
+      - PASSWORD=123456
+    ports:
+      - "8092:8080"
