@@ -11,3 +11,6 @@ harbor/common
 harbor/cerrt
 clickhouse/**/config/
 nginxproxymanager/letsencrypt
+.local
+.config
+.project
