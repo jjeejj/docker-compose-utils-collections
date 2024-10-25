@@ -1,0 +1,28 @@
+services:
+  tpnode1:
+    image: tp4a/tacport:latest
+    container_name: tpv4-node-1
+    ports:
+      - "7100:52100"
+      - "7101:52101"
+    environment:
+      - TP_ALLOW_INIT=yes
+      - TP_NODE_ID=1
+      - TP_NODE_ADDR=tpv4.tp4a.com
+      - TP_DB_ADDR=host.docker.internal:3306
+      - TP_DB_USER=root
+      - TP_DB_NAME=tacport
+      - TP_DB_PASS=pwd123...
+      - TP_SECRET_KEY=48V2%9+zmT
+      - TP_REDIS_ADDR=host.docker.internal:6379
+      - TP_NODE_SERVICE=api,ssh
+      - TP_API_MAPPING_PORT=7100
+      - TP_SSH_MAPPING_PORT=7101
+
+    volumes:
+      - /nfs-data/tacport-data:/opt/tacport/data
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1024M
