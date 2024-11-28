@@ -9,8 +9,8 @@ services:
     environment:
       TZ: "Asia/Shanghai"
     volumes:
-      - /Users/jiang/Repo/docker-compose-utils-collections/redis/single6/redis.conf:/etc/redis/redis.conf
-      - /Users/jiang/Repo/docker-compose-utils-collections/redis/single6/data:/data
+      - ${PWD}/redis.conf:/etc/redis/redis.conf
+      - ${PWD}/data:/data
     command: redis-server /etc/redis/redis.conf
     networks:
       - redisnet
