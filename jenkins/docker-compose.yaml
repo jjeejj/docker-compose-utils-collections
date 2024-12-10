@@ -1,0 +1,15 @@
+version: "3.1"
+services:
+  jenkins:
+    image: jenkinsci/blueocean
+    container_name: jenkins
+    restart: always
+    volumes:
+      - ${PWD}/data:/var/jenkins_home
+      # - /var/run/docker.sock:/var/run/docker.sock # https://www.jenkins.io/zh/doc/book/installing/#在docker中下载并运行jenkins
+    ports:
+      - 9091:8080
+      - 50000:50000
+    user: root
+
+   
