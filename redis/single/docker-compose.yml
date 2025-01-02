@@ -2,16 +2,16 @@ version: "3"
 services:
   redis:
     image: redis:5.0.5
-    container_name: single-redis
+    container_name: redis5
     restart: always
     ports:
       - "6379:6379"
     environment:
       TZ: "Asia/Shanghai"
     volumes:
-      - ${PWD}/single/redis.conf:/usr/local/etc/redis/redis.conf
-      - ${PWD}/single/data:/data
-    command: redis-server /usr/local/etc/redis/redis.conf
+      - ${PWD}/redis.conf:/etc/redis/redis.conf
+      - ${PWD}/data:/data
+    command: redis-server /etc/redis/redis.conf
     networks:
       - redisnet
 networks:
