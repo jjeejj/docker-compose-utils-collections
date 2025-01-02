@@ -3,10 +3,12 @@ version: "3"
 services:
   postgres:
     image: postgres:12
+    container_name: postgres
     restart: always
     ports:
       - 5432:5432
     environment:
+      POSTGRES_USER: admin
       POSTGRES_PASSWORD: 123456
       PGDAT: /var/lib/postgresql/data/pgdata
     volumes:
