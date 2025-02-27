@@ -1,0 +1,11 @@
+version: "3.1"
+services:
+  minio:
+    image: ghcr.io/willnorris/imageproxy
+    container_name: imageproxy
+    restart: always
+    ports:
+      - 9090:8080
+    environment:
+      - IMAGEPROXY_CACHE=/tmp/imageproxy
+    command: "-addr 0.0.0.0:8080"
