@@ -1,0 +1,15 @@
+server.host: 0.0.0.0
+# 监听端口
+server.port: 5601
+server.name: "kibana"
+
+# kibana访问es服务器的URL,就可以有多个，以逗号","隔开
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+monitoring.ui.container.elasticsearch.enabled: true
+# kibana访问Elasticsearch的账号与密码(如果ElasticSearch设置了的话)
+# elasticsearch.username: "kibana"
+# elasticsearch.password: "12345"
+
+ops.interval: 5000
+# kibana web语言
+i18n.locale: "zh-CN"

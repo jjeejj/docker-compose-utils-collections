@@ -5,7 +5,6 @@ services:
     image: elasticsearch:8.12.2
     environment:
       - discovery.type=single-node
-      - ELASTIC_PASSWORD=123456
       - TZ=Asia/Shanghai
     ports:
       - "9200:9200"
@@ -15,6 +14,20 @@ services:
       - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./data:/usr/share/elasticsearch/data
       - ./plugins:/usr/share/elasticsearch/plugins
+    networks:
+      - elastic
+
+  kibana:
+    container_name: kibana
+    image: kibana:8.12.2
+    ports:
+      - "5601:5601"
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    depends_on:
+      - elasticsearch
     networks:
       - elastic
 

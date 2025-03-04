@@ -3,5 +3,6 @@ http.host: 0.0.0.0
 # 跨域配置
 http.cors.enabled: true
 http.cors.allow-origin: "*"
+http.cors.allow-headers: "X-Requested-With,Content-Type,Content-Length,Authorization"
 # 开启密码访问
 xpack.security.enabled: false
