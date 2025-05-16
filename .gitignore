@@ -14,3 +14,5 @@ nginxproxymanager/letsencrypt
 .local
 .config
 .project
+blockscout/services/**data
+blockscout/services/dets
