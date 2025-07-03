@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  short-video-maker:
+    image: gyoridavid/short-video-maker:latest-tiny
+    environment:
+      - LOG_LEVEL=debug
+      - PEXELS_API_KEY=kghcRy84VCPGRZ6tH6X0mzgnVOp8RiQNQLqmyDEU78K2BMansr9P7fIH
+    ports:
+      - "3123:3123"
+    volumes:
+      - ./videos:/app/data/videos # expose the generated videos
