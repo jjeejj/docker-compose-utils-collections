@@ -1,0 +1,15 @@
+version: "3.1"
+services:
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n
+    restart: always
+    ports:
+      - 5678:5678 #4CEr3Sx3KAhefYD
+    environment:
+      GENERIC_TIMEZONE: Asia/Shanghai
+      TZ: Asia/Shanghai
+      N8N_RUNNERS_ENABLED: true
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: true
+    volumes:
+      - ./data:/home/node/.n8n
