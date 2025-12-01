@@ -11,8 +11,18 @@ services:
      - 12380:2380
     networks:
      - etcd_single
+    restart: on-failure
     environment:
-     - ALLOW_NONE_AUTHENTICATION=yes
+      ALLOW_NONE_AUTHENTICATION: yes
+      ETCD_AUTO_COMPACTION_MODE: revision
+      ETCD_AUTO_COMPACTION_RETENTION: 1000
+      ETCD_QUOTA_BACKEND_BYTES: 4294967296 # 4G 数据库文件的最大体积限制
+      ETCD_SNAPSHOT_COUNT: 50000 # 快照频率 。每处理 50,000 个事务（写操作）就触发一次快照存盘。这有助于加快重启恢复速度并控制日志文件大小
+    healthcheck:
+      test: ["CMD", "etcdctl", "endpoint", "health"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
   etcdkeeper:
     image: deltaprojects/etcdkeeper
     container_name: etcdkeeper-single
