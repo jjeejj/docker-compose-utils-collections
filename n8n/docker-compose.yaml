@@ -1,7 +1,7 @@
 version: "3.1"
 services:
   n8n:
-    image: n8nio/n8n
+    image: n8nio/n8n:stable
     container_name: n8n
     restart: always
     ports:
@@ -11,5 +11,12 @@ services:
       TZ: Asia/Shanghai
       N8N_RUNNERS_ENABLED: true
       N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: true
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_DATABASE: n8n
+      DB_POSTGRESDB_HOST: 192.168.155.2
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_USER: admin
+      DB_POSTGRESDB_PASSWORD: 123456
+      DB_POSTGRESDB_SCHEMA: public
     volumes:
       - ./data:/home/node/.n8n
